@@ -1,10 +1,115 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bevan:ital@0;1&family=Bruno+Ace+SC&display=swap" rel="stylesheet">
 </head>
 <body>
-$END$
+    <form id="form" th:object="${place}" th:action="@{/process-add}" method="post">
+        <h1>Add place</h1>
+        <div>
+            <input placeholder="City" type="text" th:field="${place.city}">
+        </div>
+        <div>
+            <input placeholder="Country" type="text" th:field="${place.country}">
+        </div>
+        <div>
+            <input placeholder="Latitude" type="text" th:field="${place.latitude}">
+        </div>
+        <div>
+            <input placeholder="Longitude" type="text" th:field="${place.longitude}">
+        </div>
+        <div>
+            <input placeholder="ImageURL" type="text" th:field="${place.imageURL}">
+        </div>
+        <div>
+            <button type="submit">Add</button>
+        </div>
+    </form>
 </body>
+<style>
+    h1{
+        font: 60px bold;
+        font-family: "Bevan", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        color: white;
+    }
+    body{
+        padding: 0;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-image: url("/images/index.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    div,input,button{
+        padding: 10px;
+        margin-bottom: 10px;
+
+    }
+    div{
+        width: 100%;
+        height: 100%;
+    }
+    input{
+        outline: 0;
+        width: 90%;
+        border: 0;
+        border-bottom: 2px solid white;
+        background-color: transparent;
+        color: white;
+    }
+    button{
+        width: 100%;
+        background-image: linear-gradient(to right,darkblue,black);
+        color: white;
+        cursor: pointer;
+        border-radius: 20px;
+        border: 0;
+        transition: 1s;
+        box-shadow: 0 0 10px 6px #101061;
+    }
+    #form{
+        border: 2px black solid;
+        border-radius: 20px;
+        padding: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        backdrop-filter: blur(20px);
+        box-shadow: 0px 0px 15px 15px rgb(15, 15, 41);
+        min-width: 300px;
+    }
+    button:hover{
+        box-shadow: 0 0 10px 6px ;
+        transition: 1s;
+        animation:0.2s forwards change;
+    }
+    @keyframes change {
+        25%{
+            background-image: linear-gradient(to right,darkblue,black,black);
+        }50%{
+             background-image: linear-gradient(to right,darkblue,black,black,black);
+        }75%{
+             background-image: linear-gradient(to right,darkblue,black,black,black,black);
+        }
+        100%{
+            background-image: linear-gradient(to right,black,black);
+        }
+    }
+
+    input::placeholder{
+        color: white;
+    }
+</style>
 </html>

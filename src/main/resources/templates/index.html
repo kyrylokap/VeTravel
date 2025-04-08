@@ -1,10 +1,144 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>VeTravel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bevan:ital@0;1&family=Bruno+Ace+SC&display=swap" rel="stylesheet">
 </head>
 <body>
-    Index
+<nav id="panel" style="display: flex;text-align: center;align-content: space-around;justify-content: space-between;min-height: 8%">
+    <div style="min-width:10%;height: 100%;display: flex;flex-direction: row;justify-content: start;align-items: center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+        </svg>
+        <form th:action="@{/info}" method="post" th:object="${user}">
+            <div th:if="${user.email}">
+                <button type="submit" style="border:0">
+                    <span th:text="*{username}" style="padding-right:20px;padding-left: 30px;font-family: Bevan, sans-serif; color: rgb(32, 32, 97);cursor: pointer;"></span>
+                    <input type="hidden" th:field="*{id}">
+                    <input type="hidden"  th:field="*{username}">
+                    <input type="hidden" th:field="*{email}">
+                    <input type="hidden" th:field="*{password}">
+                </button>
+            </div>
+        </form>
+    </div>
+    <h1 style="position: absolute; left: 50%; transform: translateX(-50%); font-size: 30px; font-family: Bevan, sans-serif; color: rgb(32, 32, 97);">
+        VeTravel
+    </h1>
+
+    <div id="nav-buttons" th:if="${user.email} == null">
+        <form th:action="@{/login}" method="get" th:object="${user}">
+            <button class="buttons" >Login</button>
+        </form>
+        <form th:action="@{/register}" method="get">
+            <button class="buttons">Register</button>
+        </form>
+    </div>
+</nav>
+<main style="display: flex;align-items: center;height: 89.4vh;width: 100vw;justify-content: start;flex-direction: row;">
+    <div class="cont" id="f_container" style="width: 50%;height: 100%;color: #D3D3D3;" >
+        <h1>Welcome to VeTravel – The Guide for Ambitious Travelers!</h1>
+        <p>Are you ready for an extraordinary journey to a random destination? Let’s get started!</p>
+        <h2>How does it work?</h2>
+        <p>Register, and let destiny choose your next adventure! From distant beaches and ancient cities to quiet natural retreats and exotic cultures—wherever you end up, each place will be unique.</p>
+        <h2>What awaits you?</h2>
+        <ul>
+            <li><strong>New friends and experiences:</strong> Meet people and cultures that you won't find on typical tourist routes.</li>
+            <li><strong>Unforgettable locations:</strong> From secluded islands to breathtaking mountain peaks.</li>
+            <li><strong>Total freedom:</strong> No set excursions or predefined paths. Everything is up to your choice and desires.</li>
+        </ul>
+        <h2>Why VeTravel?</h2>
+        <p>We understand that every traveler is unique. That’s why we offer not just a trip, but a personalized experience. With our platform, you can:</p>
+        <ul>
+            <li>Discover new horizons and forgotten corners of the world.</li>
+            <li>Search for and find adventures that match your interests.</li>
+            <li>Get tips from other travelers who have already taken the journey.</li>
+        </ul>
+        <h2>Are you ready to step out of the ordinary?</h2>
+        <p>Register and let the world reveal its most exciting and unusual corners to you. Start your journey with Vetravel – for those ambitious travelers who seek the unknown!</p>
+    </div>
+    <div class="cont" id="s_container" style="width: 50%;height: 100%;"></div>
+</main>
+
 </body>
+<style>
+
+    #f_container{
+        font-family: "Bevan", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        padding-left:40px;
+    }
+    body,html{
+        background-image: url("/images/index.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin: 0;
+        height: 100%;
+        padding: 0;
+        z-index: 0;
+    }
+    #panel{
+        background-color: rgb(255, 255, 255);
+        flex-direction: row;
+        justify-content: space-between;
+        border-bottom: 2px solid black;
+    }
+    #panel,.buttons{
+        display: flex;
+        align-items: center;
+    }
+    #nav-buttons{
+        width: 20%;
+    }
+    form{
+        width: 50%;
+        margin: 10px;
+    }
+    .buttons, #nav-buttons{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .buttons{
+        width: 100%;
+        min-height: 30px;
+        border-radius: 30px;
+        justify-content: center;
+        background-color: rgb(248, 51, 222);
+        border: 2px solid rgb(88, 6, 17);
+        font-size: 18px;
+        font-family: "Bevan", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        color: white;
+        transition: 2s;
+    }
+    .buttons:hover{
+        animation: change 2s forwards;
+        cursor: pointer;
+    }
+    @keyframes change {
+        100%{
+            background-color: white;
+            color: rgb(32, 32, 97);
+        }
+    }
+
+</style>
+<script>
+    window.addEventListener('wheel', function(e) {
+        if (e.ctrlKey) {
+            e.preventDefault();
+        }
+    }, { passive: false });
+    window.addEventListener('keydown', function(e) {
+        if ((e.ctrlKey && (e.key === '+' || e.key === '-')) || (e.ctrlKey && e.key === '0')) {
+            e.preventDefault();
+        }
+    });
+</script>
 </html>
