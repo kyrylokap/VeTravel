@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<form id="login-form" th:object="${user}" action="/get-user" method="post">
+    <h1>Login</h1>
+    <div id="login-div">
+        <input type="text" class="ib" placeholder="Username" th:field="*{username}">
+        <input type="text" class="ib" placeholder="Password" th:field="*{password}">
+        <button type="submit" class="ib">Login</button>
+    </div>
+</form>
+
+</body>
+<style>
+    html,body{
+        margin: 0;
+    }
+    #login-form,#login-div{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    #login-form{
+        height: 100vh;
+    }
+    .ib{
+        width: 90%;
+        padding: 0;
+    }
+</style>
+</html>
